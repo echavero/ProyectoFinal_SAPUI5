@@ -1,15 +1,15 @@
-sap.ui.define([
-    "sap/ui/core/mvc/Controller"
-],
-    /**
+    sap.ui.define([
+		"sap/ui/core/mvc/Controller"
+	],
+	/**
      * @param {typeof sap.ui.core.mvc.Controller} Controller
      */
-    function (Controller) {
-        "use strict";
+	function (Controller) {
+		"use strict";
 
-        return Controller.extend("logaligroup.empleados.controller.App", {
-            onInit: function () {
+		return Controller.extend("logaligroup.empleados.controller.App", {
+			onInit: function () {
 
-            }
-        });
-    });
+			}
+		});
+	});
