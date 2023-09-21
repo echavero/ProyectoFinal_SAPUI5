@@ -1,0 +1,55 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" 
+						xmlns:mvc="sap.ui.core.mvc" 
+						xmlns="sap.m"  
+						xmlns:form="sap.ui.layout.form">
+						
+		<form:SimpleForm id="RP_SF1"
+				title="1. {i18n>tipoEmpleado}"
+				editable="false"
+				layout="ResponsiveGridLayout">
+			<form:content>
+				<Label id="RP_La1" text="{i18n>tipo}"/>
+				<Text id="RP_Te1" text="{=${/_type} === 'interno' ? ${i18n>interno} : ${/_type} === 'autonomo' ? ${i18n>autonomo} : ${i18n>gerente}}"/>
+				<Link id="RP_Li1" press="editStepOne" text="{i18n>editar}" />
+			</form:content>
+		</form:SimpleForm>
+		
+		<form:SimpleForm id="RP_SF2"
+				title="2. {i18n>datosEmpleado}"
+				editable="false"
+				layout="ResponsiveGridLayout">
+			<form:content>
+				<Label id="RP_La2" text="{i18n>nombre}"/>
+				<Text id="RP_Te2" text="{/FirstName}"/>
+				<Label id="RP_La3" text="{i18n>apellidos}"/>
+				<Text id="RP_Te3" text="{/LastName}"/>
+				<Label id="RP_La4" text="{= ${/_type} === 'autonomo' ? ${i18n>CIF} : ${i18n>DNI}}"/>
+				<Text id="RP_Te4" text="{/Dni}"/>
+				<Label id="RP_La5" text="{= ${/_type} === 'autonomo' ? ${i18n>precioDiario} : ${i18n>salarioBrutoAnual}}"/>
+				<Text id="RP_Te5" text="{/_Salary}"/>
+				<Label id="RP_La6" text="{i18n>fechaIncorporacion}"/>
+				<Text id="RP_Te6"  text="{path:'/CreationDate',type:'sap.ui.model.type.Date'}"/>
+				<Link id="RP_Li2" press="editStepTwo" text="{i18n>editar}" />
+			</form:content>
+		</form:SimpleForm>
+		
+		<form:SimpleForm id="RP:SF3"
+				title="3. {i18n>infoAdicional}"
+				editable="false"
+				layout="ResponsiveGridLayout">
+			<form:content>
+				<Label id="RP_La7" text="{i18n>comentario}"/>
+				<Text id="RP_Te7" text="{/Comments}"/>
+				<Label id="RP_La8" text="{i18n>documentos}"/>
+				<Text id="RP_Te8" text="{/_numFiles} {i18n>archivos}"/>
+				
+				<List id="RP_Ls1" items="{/_files}">
+					<items>
+						<StandardListItem id="RP_SLI1" title="{DocName}"></StandardListItem>
+					</items>
+				</List>
+				<Link id="RP_Li3" press="editStepThree" text="{i18n>editar}" />
+			</form:content>
+		</form:SimpleForm>
+		
+</core:FragmentDefinition>

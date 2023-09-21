@@ -1,0 +1,113 @@
+<mvc:View xmlns:core="sap.ui.core" 
+		xmlns:mvc="sap.ui.core.mvc" 
+		xmlns="sap.m" 
+		controllerName="logaligroup.empleados.controller.ShowEmployee"
+		xmlns:html="http://www.w3.org/1999/xhtml" 
+		xmlns:suite="sap.suite.ui.commons" 
+		class="sapUiSizeCompact">
+		
+	<SplitApp id="splitAppEmployee">
+		<masterPages>
+			<Page id="SE_MP1" showHeader="false">
+				<Toolbar id="SE_To2" class="sapUiTinyMarginTop">
+					<Button id="SE_Bu1" icon="sap-icon://nav-back" press="onPressBack"></Button>
+					<SearchField id="SE_SF1" liveChange="onSearchEmployee" width="100%" />
+				</Toolbar>
+				<List id="SE_Ls1" itemPress="onSelectEmployee" 
+						items="{path:'odataModel>/Users',filters:[{path:'SapId',operator:'EQ',value1:'esther_chavero@yahoo.com.mx'}]}">
+					<items>
+						<StandardListItem id="SE_SLI1" title="{odataModel>FirstName} {odataModel>LastName}" 
+											description="{odataModel>Dni}" 
+											type="Active"/>
+					</items>
+				</List>
+			</Page>
+		</masterPages>
+		<detailPages>
+			<Page id="detailSelectEmployee" showHeader="false">
+				<FlexBox id="SE_FB1" alignItems="Center" justifyContent="Center" height="100%">
+					<Text id="SE_Te1" text="{i18n>seleccioneEmpleado}"></Text>
+				</FlexBox>
+			</Page>
+			<Page
+				id="detailEmployee"
+				title="{i18n>detalleEmpleado}">
+				<ObjectHeader id="SE_OH1"
+					icon= "{= ${odataModel>Type}==='0' ? 'sap-icon://employee-pane' : ${odataModel>Type}==='1' ? 'sap-icon://employee' : 'sap-icon://leads' }"
+					title="{odataModel>FirstName} {odataModel>LastName}"
+					intro="{odataModel>Dni}"
+					class="sapUiResponsivePadding--header"
+					responsive="true">
+						<ObjectAttribute id="SE_OA1" title="{i18n>fechaIncorporacion}" text="{ path:'odataModel>CreationDate', type:'sap.ui.model.type.Date'}" />
+						<ObjectAttribute id="SE_OA2" title="{i18n>tipo}" text="{= ${odataModel>Type} === '0' ? ${i18n>interno} : ${odataModel>Type} === '1' ? ${i18n>autonomo} : ${i18n>gerente}}" />
+						<ObjectAttribute id="SE_OA3" title="{i18n>comentario}" text="{odataModel>Comments}" />
+				</ObjectHeader>
+				<IconTabBar id="SE_ITB1"
+					class="sapUiResponsiveContentPadding">
+					<items>
+						<IconTabFilter id="SE_ITF1"
+							design="Horizontal"
+							icon="sap-icon://attachment"
+							text="{i18n>archivos}">
+							<UploadCollection
+                                        id="UploadCollection"
+                                        maximumFilenameLength="55"
+                                        maximumFileSize="10"
+                                        multiple="true"
+                                        sameFilenameAllowed="true"
+                                        instantUpload="true"
+                                        uploadUrl="/sap/opu/odata/sap/ZEMPLOYEES_SRV/Attachments"
+                                        items="{odataModel>UserToAttachment}"
+                                        change="onChange"
+                                        uploadComplete="onUploadComplete"
+                                        beforeUploadStarts="onBeforeUploadStart"
+                                        fileDeleted="onFileDeleted"
+                                        noDataDescription="{i18n>arrastrarArchivos}">
+                                <items>
+                                    <UploadCollectionItem
+                                        documentId="{odataModel>AttId}"
+                                        visibleEdit="false"
+                                        fileName="{odataModel>DocName}"
+                                        press="downloadFile">
+                                    </UploadCollectionItem>
+                                </items>
+							</UploadCollection>
+						</IconTabFilter>
+						<IconTabFilter id="SE_ITB2"
+							icon="sap-icon://money-bills"
+							design="Horizontal"
+							text="{i18n>historial}">
+							<suite:Timeline id="SE_Tl1"
+								enableDoubleSided="true"
+								groupByType="Year"
+								groupBy="CreationDate"
+								showHeaderBar="false"
+								enableScroll="false"
+								height="100%"
+								sortOldestFirst="true"
+								content="{odataModel>UserToSalary}">
+								<suite:content>
+									<suite:TimelineItem id="SE_Tl2"
+										userName="{parts:[{path:'odataModel>Ammount'},{path:'odataModel>Waers'}],
+												type: 'sap.ui.model.type.Currency',
+												formatOptions: {showMeasure: false}}"
+										icon="sap-icon://circle-task"
+										text="{odataModel>Comments}"
+										dateTime="{odataModel>CreationDate}">
+									</suite:TimelineItem>
+								</suite:content>
+							</suite:Timeline>
+						</IconTabFilter>
+					</items>
+				</IconTabBar>
+				<footer>
+					<Toolbar id="SE_To1">
+						<ToolbarSpacer id="SE_TS1"></ToolbarSpacer>
+						<Button id="SE_Bo2" text="{i18n>darDeBaja}" press="onDeleteEmployee"></Button>
+						<Button id="SE_Bo3" text="{i18n>ascender}" press="onRiseEmployee"></Button>
+					</Toolbar>
+				</footer>
+			</Page>
+		</detailPages>
+	</SplitApp>
+</mvc:View>

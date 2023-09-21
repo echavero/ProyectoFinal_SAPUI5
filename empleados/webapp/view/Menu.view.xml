@@ -1,0 +1,36 @@
+<mvc:View controllerName="logaligroup.empleados.controller.Menu"
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m">
+    
+    <Page id="page" title="{i18n>menuPrincipal}">
+        <content>
+			<Panel id="Me_P1" headerText="{i18n>empleados}" expandable="true" expanded="true">
+
+				<GenericTile id="Me_GT1" headerImage="sap-icon://add-employee" 
+							class="sapUiTinyMarginBegin sapUiTinyMarginTop" 
+							press="navToCreateEmployee">
+					<TileContent id="Me_TC1" footer="{i18n>crearEmpleado}">
+					</TileContent>
+				</GenericTile>
+
+				<GenericTile id="Me_GT2" headerImage="sap-icon://employee-lookup" 
+							class="sapUiTinyMarginBegin sapUiTinyMarginTop" 
+							press="navToShowEmployee">
+					<TileContent id="Me_TC2" footer="{i18n>verEmpleados}">
+					</TileContent>
+				</GenericTile>
+
+			</Panel>
+
+			<Panel id="Me_P2" headerText="{i18n>pedidos}"  expandable="true" expanded="true">
+				<GenericTile id="linkFirmarPedido"  headerImage="sap-icon://signature" 
+							class="sapUiTinyMarginBegin sapUiTinyMarginTop" 
+							press="openEmployees">
+					<TileContent id="Me_TC3" footer="{i18n>firmarPedido}">
+					</TileContent>
+				</GenericTile>
+			</Panel>
+						
+		</content>
+    </Page>
+</mvc:View>

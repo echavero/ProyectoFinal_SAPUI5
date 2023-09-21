@@ -1,0 +1,53 @@
+<core:FragmentDefinition xmlns:core="sap.ui.core" 
+						xmlns:mvc="sap.ui.core.mvc" 
+						xmlns="sap.m"  
+						xmlns:f="sap.ui.layout.form">
+						
+	<Dialog id="REm_Di1" title="{i18n>nuevoAscenso}">
+		<content>
+			<f:Form id="REm_Fo1">
+					<f:layout>
+						<f:ResponsiveGridLayout id="REm_RGL1"
+							labelSpanXL="3"
+							labelSpanL="3"
+							labelSpanM="3"
+							labelSpanS="12"
+							adjustLabelSpan="false"
+							emptySpanXL="4"
+							emptySpanL="4"
+							emptySpanM="4"
+							emptySpanS="0"
+							columnsXL="1"
+							columnsL="1"
+							columnsM="1"
+							singleContainerFullSize="false" />
+					</f:layout>
+					<f:formContainers>
+						<f:FormContainer id="REm_FC1">
+							<f:formElements>
+								<f:FormElement id="REm_FE1" label="{i18n>salario}">
+									<f:fields>
+										<Input value="{newRise>/Ammount}" id="name"/>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement id="REm_FE2" label="{i18n>fecha}">
+									<f:fields>
+										<DatePicker id="REm_DP1" dateValue="{newRise>/CreationDate}"></DatePicker>
+									</f:fields>
+								</f:FormElement>
+								<f:FormElement id="REm_FE3" label="{i18n>comentario}">
+									<f:fields>
+										<TextArea id="REm_TA1" value="{newRise>/Comments}"></TextArea>
+									</f:fields>
+								</f:FormElement>
+							</f:formElements>
+						</f:FormContainer>
+					</f:formContainers>
+			</f:Form>
+		</content>
+		<buttons>
+			<Button id="REm_Bu1" text="{i18n>aceptar}"  press="addRise"></Button>
+			<Button id="REm_Bu2" text="{i18n>cancelar}" press="onCloseRiseDialog"></Button>
+		</buttons>
+	</Dialog>
+</core:FragmentDefinition>
